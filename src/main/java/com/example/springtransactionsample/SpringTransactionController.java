@@ -23,13 +23,11 @@ public class SpringTransactionController {
     }
 
     @GetMapping("/update")
-    public int update() {
+    public void update() {
         SpringTransactionEmp emp = new SpringTransactionEmp();
-        UUID uuid = UUID.randomUUID();
-        int name = new Random().nextInt(10);
-        emp.setId(uuid.toString());
-        emp.setName(String.valueOf(name));
-        return service.updateEmp(emp);
+        emp.setId(UUID.randomUUID().toString());
+        emp.setName(String.valueOf(new Random().nextInt(10)));
+        service.updateEmp(emp);
     }
 
 }
