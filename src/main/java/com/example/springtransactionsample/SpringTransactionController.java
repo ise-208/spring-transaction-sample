@@ -11,23 +11,38 @@ import java.util.UUID;
 @RestController
 public class SpringTransactionController {
 
-    SpringTransactionService service;
+    TransactionMethodService methodService;
+    TransactionClassService classService;
 
-    public SpringTransactionController(SpringTransactionService service) {
-        this.service = service;
+    public SpringTransactionController(TransactionMethodService methodService, TransactionClassService classService) {
+        this.methodService = methodService;
+        this.classService = classService;
     }
 
-    @GetMapping("/find")
-    public List<Map<String, Object>> find() {
-        return service.findByEmp();
+    @GetMapping("/m-find")
+    public List<Map<String, Object>> methodFind() {
+        return methodService.findByEmp();
     }
 
-    @GetMapping("/update")
-    public void update() {
+    @GetMapping("/m-update")
+    public void methodUpdate() {
         SpringTransactionEmp emp = new SpringTransactionEmp();
         emp.setId(UUID.randomUUID().toString());
         emp.setName(String.valueOf(new Random().nextInt(10)));
-        service.updateEmp(emp);
+        methodService.updateEmp(emp);
+    }
+
+    @GetMapping("/c-find")
+    public List<Map<String, Object>> classFind() {
+        return classService.findByEmp();
+    }
+
+    @GetMapping("/c-update")
+    public void classUpdate() {
+        SpringTransactionEmp emp = new SpringTransactionEmp();
+        emp.setId(UUID.randomUUID().toString());
+        emp.setName(String.valueOf(new Random().nextInt(10)));
+        classService.updateEmp(emp);
     }
 
 }
