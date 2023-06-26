@@ -32,6 +32,14 @@ public class SpringTransactionController {
         methodService.updateEmp(emp);
     }
 
+    @GetMapping("/m-require")
+    public void methodRequire() {
+        SpringTransactionEmp emp = new SpringTransactionEmp();
+        emp.setId(UUID.randomUUID().toString());
+        emp.setName(String.valueOf(new Random().nextInt(10)));
+        methodService.requiredEmp(emp);
+    }
+
     @GetMapping("/c-find")
     public List<Map<String, Object>> classFind() {
         return classService.findByEmp();
